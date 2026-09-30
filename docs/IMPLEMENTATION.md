@@ -128,6 +128,8 @@ DSH 会话贴入本章
 | `npm run demo:preview` | 通过；工具流生成并采用本地素材、试配音和合成，MP4 时长约 10.021333 秒，确认视频/声音/中文字幕轨、SRT 与时间线 |
 | 本地交付检查 | 通过；样例通过 `video_studio_job list` 的 `files` 返回 MP4、SRT、时间线 3 个本地文件，宿主测试检查交付与文件可用状态 |
 | 安装包检查 | `npm pack --dry-run` 通过；宿主、技能、文档与设置客户端在包内，无创作工作台或独立 HTTP 服务 |
+| 干净源码安装检查 | `npm run test:package` 通过；不复制 lib / node_modules，`npm ci` 自动 prepare 构建两个入口；压缩包在禁止生命周期脚本的临时消费者中仍可导入宿主入口、注册客户端模块 |
+| 桌面实际启用 | 修复旧 Git 包缺少 lib/index.js 与 lib/client.js 的问题；将完整本地 tgz 安装到当前桌面 profile 后启用，界面显示「共 1 个 · 1 运行中」，安装位置的宿主入口实际 import 成功 |
 
 复现命令：
 
@@ -136,6 +138,7 @@ npm run check
 npm run test:dsh -- /absolute/path/to/deepseek-harness
 npm run test:settings -- /absolute/path/to/deepseek-harness
 npm run test:settings-client -- /absolute/path/to/deepseek-harness
+npm run test:package
 npm run demo:preview
 ```
 

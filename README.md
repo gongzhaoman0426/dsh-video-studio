@@ -49,6 +49,14 @@ node /Users/zhaoman/code/deepseek/deepseek-harness/apps/cli/lib/bin.js --profile
 
 进入有工作区的 DSH 会话，直接把小说正文贴给 DeepSeek 即可开始。
 
+### 安装后提示 failed to import
+
+插件入口为 `lib/index.js`，设置客户端为 `lib/client.js`。Git 仓库不提交 `lib`，因此 Git 安装需要通过 `prepare` 自动构建；如果安装的是没有 `prepare` 的旧版本，包虽已安装，启用时仍会因入口文件不存在而失败。重新启用或填写 API Key 无法补齐这些文件。
+
+本项目通过 `prepare` 在依赖安装和打包时构建入口。通过 Git 安装时，需要远端包含此修复；如果 DSH 提示批准插件构建脚本，检查并允许对应构建项后重试。已有旧包不会因本地源码改动自动更新。
+
+本机修复可在项目目录执行 `npm ci` 和 `npm pack`，然后在 DSH 的插件安装入口填写生成的 `dsh-chapter-video-studio-0.1.0.tgz` 的绝对路径，更新并重新启用插件。该包已经包含编译入口，安装时无需再次构建。桌面版可能使用独立 profile，优先通过当前桌面内安装入口更新。
+
 ## 从第一章开始
 
 可以直接这样说：
@@ -159,6 +167,7 @@ npm run build
 node scripts/dsh-smoke.mjs /absolute/path/to/deepseek-harness
 node scripts/dsh-settings-smoke.mjs /absolute/path/to/deepseek-harness
 node scripts/dsh-settings-client-smoke.mjs /absolute/path/to/deepseek-harness
+npm run test:package
 npm run demo:preview
 ```
 

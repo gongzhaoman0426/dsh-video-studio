@@ -24,12 +24,14 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
+    "prepare": "npm run build",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test test/*.test.ts",
     "check": "npm run typecheck && npm run test && npm run build",
     "test:dsh": "node scripts/dsh-smoke.mjs",
     "test:settings": "node scripts/dsh-settings-smoke.mjs",
     "test:settings-client": "node scripts/dsh-settings-client-smoke.mjs",
+    "test:package": "node scripts/package-smoke.mjs",
     "demo:preview": "tsx scripts/demo.ts"
   },
   "dsh": {

@@ -1,0 +1,8 @@
+node_modules/
+lib/
+.DS_Store
+*.tgz
+.dsh-video-studio/
+.test-output/
+coverage/
+.env

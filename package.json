@@ -1,0 +1,58 @@
+{
+  "name": "dsh-chapter-video-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DeepSeek Harness 原生章节视频工作室：逐章剧本、分镜、资产、生成与剪辑",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "skills",
+    "docs",
+    "README.md",
+    "THIRD-PARTY.md",
+    ".env.example",
+    "cordis.patch.yml"
+  ],
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test test/*.test.ts",
+    "check": "npm run typecheck && npm run test && npm run build",
+    "test:dsh": "node scripts/dsh-smoke.mjs",
+    "test:settings": "node scripts/dsh-settings-smoke.mjs",
+    "test:settings-client": "node scripts/dsh-settings-client-smoke.mjs",
+    "demo:preview": "tsx scripts/demo.ts"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": ["@deepseek-ai/dsh-client-ui-settings", "@deepseek-ai/dsh-client-ui-settings-plugins"]
+    }
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.4",
+    "yaml": "^2.8.1",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.31",
+    "esbuild": "^0.25.0",
+    "react": "^18.3.1",
+    "tsx": "^4.20.0",
+    "typescript": "^5.7.0"
+  }
+}
